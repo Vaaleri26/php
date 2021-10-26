@@ -1,7 +1,7 @@
 <?php
-$login=filter_var(trim($_POST['login']),FILTER_SANITIZE_STRING);
+$login=filter_var(trim($_POST['LOGIN']),FILTER_SANITIZE_STRING);
 
-$password=filter_var(trim($_POST['password']),FILTER_SANITIZE_STRING);
+$password=filter_var(trim($_POST['PASSWORD']),FILTER_SANITIZE_STRING);
 
 require_once 'connect.php';
 $user=mysqli_query($mysql, "SELECT * FROM `users` WHERE `LOGIN`='$login' AND `PASSWORD`='$password'");
@@ -11,7 +11,8 @@ if(count($row)==0){
     exit();
 }
 
- 
+setcookie('user',$user['EMAIL'], time()+3600); 
+
 header('Location: logout.php');
  
 ?>
